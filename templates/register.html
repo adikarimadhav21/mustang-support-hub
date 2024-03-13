@@ -1,0 +1,48 @@
+{% extends 'base.html' %} {% load static %} {% block title %}
+<title>Register | UNIHUB</title>
+{% endblock %} {% block extra_css %}
+<link href="{% static 'css/sb-admin-2.css' %}" rel="stylesheet" />
+{% endblock %}{% block main %}
+<div class="container">
+  <div class="card o-hidden border-0 shadow-lg my-5">
+    <div class="card-body p-0">
+      <div class="row">
+        <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+        <div class="col-lg-7">
+          <div class="p-5">
+            <div class="text-center">
+              <h1 class="h4 text-gray-900 mb-4">Create Your Account</h1>
+            </div>
+            <form class="user" method="post">
+              {% csrf_token %}
+              <div class="form-group">{{ register_form.first_name }}</div>
+              <div class="form-group">{{ register_form.last_name }}</div>
+              <div class="form-group">{{ register_form.email }}</div>
+              <div class="form-group">
+                <span
+                  >{{ register_form.two_step_verification_question.label }}
+                </span>
+                {{register_form.two_step_verification_question }}
+              </div>
+              <div class="form-group">
+                {{ register_form.two_step_verification_answer }}
+              </div>
+              <div class="form-group">{{ register_form.password }}</div>
+              <div class="form-group">{{ register_form.confirm_password }}</div>
+              <button type="submit" class="btn btn-primary btn-user btn-block">
+                Register Account
+              </button>
+            </form>
+            <hr />
+            <div class="text-center">
+              <a class="small" href="{% url 'login' %}"
+                >Already have an account? Login!</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
