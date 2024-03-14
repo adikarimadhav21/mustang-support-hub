@@ -60,3 +60,27 @@ class register(forms.Form):
     )
 
 
+class login(forms.Form):
+    email = forms.EmailField(
+        label="Email",
+        required=True,
+        widget=forms.EmailInput(
+            attrs={
+                "placeholder": "Enter Email Address...",
+                "class": "form-control form-control-user",
+            }
+        ),
+    )
+    password = forms.CharField(
+        label="Password",
+        max_length=100,
+        required=True,
+        widget=forms.PasswordInput(
+            attrs={
+                "placeholder": "Password",
+                "class": "form-control form-control-user",
+            }
+        ),
+    )
+
+

@@ -8,6 +8,32 @@ from . import models
 from . import forms
 
 
+def LogoutView(request):
+    logout(request)
+    return redirect("login")
+
+
+class LoginView(View):
+    def get(self, request):
+        if request.user.is_authenticated:
+            return redirect("home")
+        login_form = forms.login()
+        return render(request, "login.html", {"login_form": login_form})
+
+    def post(self, request):
+        login_form = forms.login(request.POST)
+        if login_form.is_valid():
+            email = login_form.cleaned_data["email"]
+            password = login_form.cleaned_data["password"]
+            user = authenticate(username=email, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect("home")
+            else:
+                print("Invalid Credentials")
+                return redirect("login")
+
+
 
 class RegisterView(View):
     def get(self, request):
