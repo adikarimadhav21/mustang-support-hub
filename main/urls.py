@@ -10,5 +10,18 @@ urlpatterns = [
     path("logout/", login_required(views.LogoutView), name="logout"),
     #
     path("", views.HomeView.as_view(), name="home"),
+
+     #
+    path("rideshare/", views.RideShareView.as_view(), name="rideshare"),
+    path(
+        "rideshare/ride/<int:pk>/",
+        login_required(views.RideShareRideView.as_view()),
+        name="rideshare_ride",
+    ),
+    path(
+        "rideshare/ride/new/",
+        login_required(views.RideShareRideNewView.as_view()),
+        name="rideshare_ride_new",
+    ),
     
 ]

@@ -84,3 +84,37 @@ class login(forms.Form):
     )
 
 
+
+class RideShareForm(forms.ModelForm):
+    class Meta:
+        model = models.RideShareModel
+        fields = [
+            "start_location",
+            "end_location",
+            "datetime",
+            "description",
+            "available_seats",
+            "total_seats",
+            "contact",
+        ]
+        widgets = {
+            "start_location": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "Enter Start Location"}
+            ),
+            "end_location": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "Enter End Location"}
+            ),
+            "datetime": forms.TextInput(attrs={"type": "datetime-local"}),
+            "description": forms.Textarea(
+                attrs={"class": "form-control", "placeholder": "Enter Description"}
+            ),
+            "available_seats": forms.NumberInput(
+                attrs={"class": "form-control", "placeholder": "Enter Available Seats"}
+            ),
+            "total_seats": forms.NumberInput(
+                attrs={"class": "form-control", "placeholder": "Enter Total Seats"}
+            ),
+            "contact": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "Enter Contact"}
+            ),
+        }
