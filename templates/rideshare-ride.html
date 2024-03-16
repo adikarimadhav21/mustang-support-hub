@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+<!--  -->
+{% load static %}
+<!--  -->
+{% block extra_css %}
+<link
+  href="{% static 'font-awesome/css/font-awesome.min.css' %}"
+  rel="stylesheet"
+/>
+{% endblock %}
+<!--  -->
+{% block main %}
+
+<section class="py-5">
+  <div class="container px-4 px-lg-5 my-5">
+    <div class="row gx-4 gx-lg-5 align-items-center">
+      <div class="col-md-6">
+        <h1 class="display-5 fw-bolder">
+          <!--  -->
+          {{ rideshare_item.start_location }}
+          <!--  -->
+          to
+          <!--  -->
+          {{ rideshare_item.end_location }}
+        </h1>
+        <div class="mt-3">
+          <p>
+            <i class="fa fa-calendar"></i>
+            <!--  -->
+            {{ rideshare_item.datetime | date:"F d, Y" }}
+          </p>
+          <p>
+            <i class="fa fa-clock-o"></i>
+            <!--  -->
+            {{ rideshare_item.datetime | date:"h:i A" }}
+          </p>
+        </div>
+        <div>
+          <h2 class="mt-3 fw-bolder">Description:</h2>
+          <p>{{ rideshare_item.description }}</p>
+        </div>
+        <p class="mt-3">
+          <strong>Number of seats available:</strong>
+          &nbsp;
+          <!--  -->
+          {{ rideshare_item.available_seats }}
+          <!--  -->
+          /
+          <!--  -->
+          {{ rideshare_item.total_seats }}
+        </p>
+        <p class="mt-3">
+          <strong>Contact:</strong>
+          &nbsp;
+          <!--  -->
+          {{ rideshare_item.contact }}
+        </p>
+        <p class="mt-3">
+          <strong>Posted by:</strong>
+          &nbsp;
+          <!--  -->
+          {{ rideshare_item.user.first_name }}
+          <!--  -->
+          {{rideshare_item.user.last_name }}
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
