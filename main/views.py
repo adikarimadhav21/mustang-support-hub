@@ -7,12 +7,12 @@ from django.contrib.auth.models import User as UserModel
 from . import models
 from . import forms
 
-
+# View for logging out the user
 def LogoutView(request):
     logout(request)
     return redirect("login")
 
-
+# View for user login
 class LoginView(View):
     def get(self, request):
         if request.user.is_authenticated:
@@ -33,8 +33,7 @@ class LoginView(View):
                 print("Invalid Credentials")
                 return redirect("login")
 
-
-
+# View for user registration
 class RegisterView(View):
     def get(self, request):
         register_form = forms.register()
@@ -65,16 +64,14 @@ class RegisterView(View):
             print(register_form.errors)
             return redirect("register")
 
-
+# View for the home page
 class HomeView(View):
-
     def get(self, request):
         if request.user.is_authenticated:
             return render(request, "index-user.html", {"navbarActive": "home"})
         return render(request, "index.html", {"navbarActive": "home"})
 
-
-
+# View for the RideShare page
 class RideShareView(View):
     def get(self, request):
         if request.user.is_authenticated:
@@ -88,7 +85,7 @@ class RideShareView(View):
             )
         return render(request, "rideshare.html", {"navbarActive": "rideshare"})
 
-
+# View for a specific RideShare ride
 class RideShareRideView(View):
     def get(self, request, pk):
         rideshare_item = models.RideShareModel.objects.get(pk=pk)
@@ -101,9 +98,8 @@ class RideShareRideView(View):
             },
         )
 
-
+# View for creating a new RideShare ride
 class RideShareRideNewView(View):
-
     def get(self, request):
         if request.user.is_authenticated:
             rideshare_ride_form = forms.RideShareForm()

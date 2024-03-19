@@ -1,8 +1,7 @@
 from django import forms
-
 from . import models
 
-
+# Form for user registration
 class register(forms.Form):
     first_name = forms.CharField(
         label="First Name",
@@ -59,7 +58,7 @@ class register(forms.Form):
         ),
     )
 
-
+# Form for user login
 class login(forms.Form):
     email = forms.EmailField(
         label="Email",
@@ -83,8 +82,7 @@ class login(forms.Form):
         ),
     )
 
-
-
+# Form for creating a new RideShare ride
 class RideShareForm(forms.ModelForm):
     class Meta:
         model = models.RideShareModel
