@@ -32,4 +32,17 @@ urlpatterns = [
         login_required(views.RideShareRideNewView.as_view()),
         name="rideshare_ride_new",
     ),
+
+    # roomfinder pages
+    path("roomfinder/", views.RoomFinderView.as_view(), name="roomfinder"),
+    path(
+        "roomfinder/room/<int:pk>/",
+        login_required(views.RoomFinderRoomView.as_view()),
+        name="roomfinder_room",
+    ),
+    path(
+        "roomfinder/room/new/",
+        login_required(views.RoomFinderRoomNewView.as_view()),
+        name="roomfinder_room_new",
+    ),
 ]

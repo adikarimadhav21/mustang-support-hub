@@ -147,3 +147,77 @@ class RideShareRideNewView(View):
                     "error": rideshare_item_form.errors,
                 },
             )
+
+class RoomFinderView(View):
+    def get(self, request):
+        if request.user.is_authenticated:
+            roomfinder_items = models.RoomFinderModel.objects.all().order_by(
+                "-created_at"
+            )
+            return render(
+                request,
+                "roomfinder-user.html",
+                {"navbarActive": "roomfinder", "roomfinder_items": roomfinder_items},
+            )
+        return render(request, "roomfinder.html", {"navbarActive": "roomfinder"})
+
+
+class RoomFinderRoomView(View):
+    def get(self, request, pk):
+        roomfinder_item = models.RoomFinderModel.objects.get(pk=pk)
+        return render(
+            request,
+            "roomfinder-room.html",
+            {
+                "navbarActive": "roomfinder",
+                "roomfinder_item": roomfinder_item,
+            },
+        )
+
+
+class RoomFinderRoomNewView(View):
+
+    def get(self, request):
+        if request.user.is_authenticated:
+            roomfinder_room_form = forms.RoomFinderForm()
+            return render(
+                request,
+                "roomfinder-room-new.html",
+                {
+                    "navbarActive": "roomfinder",
+                    "roomfinder_room_form": roomfinder_room_form,
+                },
+            )
+        return redirect("login")
+
+    def post(self, request):
+        roomfinder_item_form = forms.RoomFinderForm(request.POST)
+        if roomfinder_item_form.is_valid():
+            title = roomfinder_item_form.cleaned_data["title"]
+            description = roomfinder_item_form.cleaned_data["description"]
+            location = roomfinder_item_form.cleaned_data["location"]
+            no_of_availability = roomfinder_item_form.cleaned_data["no_of_availability"]
+            contact = roomfinder_item_form.cleaned_data["contact"]
+            user = request.user
+            roomfinder_item = models.RoomFinderModel(
+                title=title,
+                description=description,
+                location=location,
+                no_of_availability=no_of_availability,
+                contact=contact,
+                user=user,
+            )
+            roomfinder_item.save()
+            return redirect("roomfinder")
+        else:
+            print(roomfinder_item_form.errors)
+            return render(
+                request,
+                "roomfinder-room-new.html",
+                {
+                    "navbarActive": "roomfinder",
+                    "roomfinder_item_form": roomfinder_item_form,
+                    "error": roomfinder_item_form.errors,
+                },
+            )
+
