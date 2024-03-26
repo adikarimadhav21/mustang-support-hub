@@ -116,3 +116,27 @@ class RideShareForm(forms.ModelForm):
                 attrs={"class": "form-control", "placeholder": "Enter Contact"}
             ),
         }
+
+# Form for creating a new roomfinder
+
+class RoomFinderForm(forms.ModelForm):
+    class Meta:
+        model = models.RoomFinderModel
+        fields = ["title", "description", "location", "no_of_availability", "contact"]
+        widgets = {
+            "title": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "Enter Title"}
+            ),
+            "description": forms.Textarea(
+                attrs={"class": "form-control", "placeholder": "Enter Description"}
+            ),
+            "location": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "Enter Location"}
+            ),
+            "no_of_availability": forms.NumberInput(
+                attrs={"class": "form-control", "placeholder": "Enter Availability"}
+            ),
+            "contact": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "Enter Contact"}
+            ),
+        }
