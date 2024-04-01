@@ -16,3 +16,10 @@ class RideShareAdmin(admin.ModelAdmin):
     
     # Adding filters to the admin list view
     list_filter = ["start_location", "end_location"]
+
+# Registering RoomFinderModel with the admin site
+
+@admin.register(models.RoomFinderModel)
+class RoomFinderAdmin(admin.ModelAdmin):
+    list_display = ["title", "location", "no_of_availability", "contact"]
+    list_filter = ["location"]
