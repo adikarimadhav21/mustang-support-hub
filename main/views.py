@@ -221,3 +221,10 @@ class RoomFinderRoomNewView(View):
                 },
             )
 
+
+class LostFoundView(View):
+    def get(self, request):
+        if request.user.is_authenticated:
+            return render(request, "lostfound-user.html", {"navbarActive": "lostfound"})
+        return render(request, "lostfound.html", {"navbarActive": "lostfound"})
+

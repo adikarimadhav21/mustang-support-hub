@@ -45,4 +45,7 @@ urlpatterns = [
         login_required(views.RoomFinderRoomNewView.as_view()),
         name="roomfinder_room_new",
     ),
+    
+    path("lostfound/", views.LostFoundView.as_view(), name="lostfound"),
+
 ]
