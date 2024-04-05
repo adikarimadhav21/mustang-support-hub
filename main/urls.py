@@ -45,7 +45,17 @@ urlpatterns = [
         login_required(views.RoomFinderRoomNewView.as_view()),
         name="roomfinder_room_new",
     ),
-    
-    path("lostfound/", views.LostFoundView.as_view(), name="lostfound"),
 
+    path("lostfound/", views.LostFoundView.as_view(), name="lostfound"),
+    path("marketplace/", views.MarketplaceView.as_view(), name="marketplace"),
+    path(
+        "marketplace/item/<int:pk>/",
+        login_required(views.MarketplaceItemView.as_view()),
+        name="marketplace_item",
+    ),
+    path(
+        "marketplace/item/new/",
+        login_required(views.MarketplaceItemNewView.as_view()),
+        name="marketplace_item_new",
+    ),
 ]

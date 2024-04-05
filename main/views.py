@@ -228,3 +228,84 @@ class LostFoundView(View):
             return render(request, "lostfound-user.html", {"navbarActive": "lostfound"})
         return render(request, "lostfound.html", {"navbarActive": "lostfound"})
 
+
+class MarketplaceView(View):
+    def get(self, request):
+        if request.user.is_authenticated:
+            marketplace_items = models.MarketplaceModel.objects.all().order_by(
+                "-created_at"
+            )
+            return render(
+                request,
+                "marketplace-user.html",
+                {"navbarActive": "marketplace", "marketplace_items": marketplace_items},
+            )
+        return render(request, "marketplace.html", {"navbarActive": "marketplace"})
+
+
+class MarketplaceItemView(View):
+    def get(self, request, pk):
+        marketplace_item = models.MarketplaceModel.objects.get(pk=pk)
+        similar_items = (
+            models.MarketplaceModel.objects.filter(category=marketplace_item.category)
+            .order_by("-created_at")
+            .exclude(pk=pk)[:4]
+        )
+        return render(
+            request,
+            "marketplace-item.html",
+            {
+                "navbarActive": "marketplace",
+                "marketplace_item": marketplace_item,
+                "similar_items": similar_items,
+            },
+        )
+
+
+class MarketplaceItemNewView(View):
+    def get(self, request):
+        if request.user.is_authenticated:
+            marketplace_item_form = forms.MarketplaceForm()
+            return render(
+                request,
+                "marketplace-item-new.html",
+                {
+                    "navbarActive": "marketplace",
+                    "marketplace_item_form": marketplace_item_form,
+                },
+            )
+        return redirect("login")
+
+    def post(self, request):
+        marketplace_item_form = forms.MarketplaceForm(request.POST, request.FILES)
+        if marketplace_item_form.is_valid():
+            category = marketplace_item_form.cleaned_data["category"]
+            title = marketplace_item_form.cleaned_data["title"]
+            description = marketplace_item_form.cleaned_data["description"]
+            price = marketplace_item_form.cleaned_data["price"]
+            image = marketplace_item_form.cleaned_data["image"]
+            contact = marketplace_item_form.cleaned_data["contact"]
+            user = request.user
+            marketplace_item = models.MarketplaceModel(
+                category=category,
+                title=title,
+                description=description,
+                price=price,
+                image=image,
+                contact=contact,
+                user=user,
+            )
+            marketplace_item.save()
+            return redirect("marketplace")
+        else:
+            print(marketplace_item_form.errors)
+            return render(
+                request,
+                "marketplace-item-new.html",
+                {
+                    "navbarActive": "marketplace",
+                    "marketplace_item_form": marketplace_item_form,
+                    "error": marketplace_item_form.errors,
+                },
+            )
+

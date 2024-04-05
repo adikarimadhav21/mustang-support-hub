@@ -140,3 +140,29 @@ class RoomFinderForm(forms.ModelForm):
                 attrs={"class": "form-control", "placeholder": "Enter Contact"}
             ),
         }
+
+class MarketplaceForm(forms.ModelForm):
+    class Meta:
+        model = models.MarketplaceModel
+        fields = ["category", "title", "description", "price", "image", "contact"]
+        widgets = {
+            "category": forms.Select(
+                attrs={"class": "form-control", "placeholder": "Select Category"}
+            ),
+            "title": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "Enter Title"}
+            ),
+            "description": forms.Textarea(
+                attrs={"class": "form-control", "placeholder": "Enter Description"}
+            ),
+            "price": forms.NumberInput(
+                attrs={"class": "form-control", "placeholder": "Enter Price"}
+            ),
+            "image": forms.FileInput(
+                attrs={"class": "form-control", "placeholder": "Image"}
+            ),
+            "contact": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "Enter Contact"}
+            ),
+        }
+
