@@ -23,3 +23,13 @@ class RideShareAdmin(admin.ModelAdmin):
 class RoomFinderAdmin(admin.ModelAdmin):
     list_display = ["title", "location", "no_of_availability", "contact"]
     list_filter = ["location"]
+
+@admin.register(models.MarketplaceCategoryModel)
+class MarketplaceCategoryAdmin(admin.ModelAdmin):
+    list_display = ["category"]
+
+
+@admin.register(models.MarketplaceModel)
+class MarketplacwAdmin(admin.ModelAdmin):
+    list_display = ["title", "category", "user", "price", "contact"]
+    list_filter = ["category", "user"]
