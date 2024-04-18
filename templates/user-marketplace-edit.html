@@ -1,0 +1,38 @@
+{% extends 'base.html' %} {% load static %} {% block extra_css %}
+<link href="{% static 'css/sb-admin-2.css' %}" rel="stylesheet" />
+{% endblock %} {% block main %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-xl-10 col-lg-12 col-md-9">
+      <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+          <div class="row">
+            <div class="col-lg-6 d-none d-lg-block bg-marketplace-image"></div>
+            <div class="col-lg-6">
+              <div class="p-5">
+                <div class="text-center">
+                  <h1 class="h4 text-gray-900 mb-4">Edit Item</h1>
+                </div>
+
+                {% if error %}
+                <div class="alert alert-danger" role="alert">{{ error }}</div>
+                {% endif %}
+
+                <form class="user" method="post" enctype="multipart/form-data">
+                  {% csrf_token %} {{ marketplace_item_form.as_p }}
+                  <button
+                    type="submit"
+                    class="btn btn-primary btn-user btn-block"
+                  >
+                    Update Item
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

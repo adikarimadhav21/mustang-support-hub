@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+<!--  -->
+{% block header %}
+<!-- Header-->
+<header class="bg-dark py-5">
+  <div class="container px-4 px-lg-5">
+    <div class="text-center text-white">
+      <h1 class="display-4 fw-bolder">Marketplace</h1>
+      <p class="lead fw-normal text-white-50 mb-0">
+        Lorem Ipsum is simply dummy text of the printing and typesetting
+        industry.
+      </p>
+
+      <button
+        class="btn btn-success mt-5 -mb-5"
+        onclick="location.href='{% url 'marketplace_item_new' %}'"
+      >
+        Post a new item
+      </button>
+    </div>
+  </div>
+</header>
+<!--  -->
+{% endblock %}
+<!--  -->
+{% block main %}
+
+<section class="py-5">
+  <div class="container px-4 px-lg-5">
+    <div class="row">
+      <!-- search -->
+      <div class="col-8">
+        <form method="GET" action="{% url 'marketplace_search' %}" class="mb-5">
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Search"
+              name="search"
+              value="{{ search }}"
+            />
+            <button class="btn btn-outline-secondary" type="submit">
+              Search
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- filter -->
+      <div class="col-4">
+        <form method="GET" action="{% url 'marketplace_category' %}" class="mb-5">
+          <div class="input-group mb-3">
+            <select
+              class="form-select"
+              name="category"
+              aria-label="Default select example"
+            >
+              <option value="" selected>Category</option>
+              {% for category in categories %}
+              <option value="{{ category.id }}"
+                {% if category.id == category_id %}
+                selected
+                {% endif %}
+              >
+                {{ category.category }}
+              </option>
+              {% endfor %}
+            </select>
+            <button class="btn btn-outline-secondary" type="submit">
+              Filter
+            </button>
+          </div>
+        </form>
+
+        </div>
+    </div>
+
+    <div
+      class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"
+    >
+      {% if marketplace_items.count == 0 %}
+      <div class="col mb-5">
+        <div class="card h-100"
+        style="transform: perspective(1px) translateZ(0); box-shadow: 0 0 1px rgba(0, 0, 0, 0), 0 3px 15px rgba(0, 0, 0, 0.2);"
+        >
+          <div class="card-body p-4">
+            <div class="text-center">
+              <h5 class="fw-bolder">No items found</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %} {% for item in marketplace_items %}
+      <div class="col mb-5">
+        <div class="card h-100"
+        style="transform: perspective(1px) translateZ(0); box-shadow: 0 0 1px rgba(0, 0, 0, 0), 0 3px 15px rgba(0, 0, 0, 0.2);"
+        >
+          <div
+            class="badge bg-dark text-white position-absolute"
+            style="top: 0.5rem; right: 0.5rem; z-index: 9999;"
+          >
+            {{ item.category.category }}
+          </div>
+          <img class="card-img-top card-img-top-same-height" src="{{ item.image.url }}" alt="..." />
+          <div class="card-body p-4">
+            <div class="text-center">
+              <h5 class="fw-bolder">{{ item.title }}</h5>
+              $ {{ item.price }}
+            </div>
+          </div>
+          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+            <div class="text-center">
+              <a
+                class="btn btn-outline-dark mt-auto"
+                href="{% url 'marketplace_item' item.id %}"
+                >View More</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<!--  -->
+{% endblock %}
