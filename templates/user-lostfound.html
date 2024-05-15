@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+<!--  -->
+{% block header %}
+<!-- Header-->
+<header class="bg-dark py-5">
+  <div class="container px-4 px-lg-5">
+    <div class="text-center text-white">
+      <h1 class="display-4 fw-bolder">User Lost & Found</h1>
+    </div>
+  </div>
+</header>
+<!--  -->
+{% endblock %}
+<!--  -->
+{% block main %}
+
+<section class="py-5">
+  <div class="container px-4 px-lg-5 mt-5">
+    <div
+      class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-2 row-cols-xl-3 justify-content-center"
+    >
+      {% for item in lostfound_items %}
+      <div class="col mb-5">
+        <div
+          class="card h-100"
+          style="
+            transform: perspective(1px) translateZ(0);
+            box-shadow: 0 0 1px rgba(0, 0, 0, 0), 0 3px 15px rgba(0, 0, 0, 0.2);
+          "
+        >
+          <img
+            class="card-img-top card-img-top-same-height"
+            src="{{ item.image.url }}"
+            alt="..."
+          />
+          <div class="card-body p-4">
+            <div class="text-center">
+              <h5 class="fw-bolder">{{ item.title }}</h5>
+            </div>
+          </div>
+          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+            <div class="text-center">
+              <a
+                class="btn btn-outline-success mt-1 mx-1"
+                href="{% url 'lostfound_item' item.id %}"
+                >View</a
+              >
+              <a
+                class="btn btn-outline-dark mt-1 mx-1"
+                href="{% url 'user_lostfound_edit' item.id %}"
+                >Edit</a
+              >
+              <a
+                class="btn btn-outline-danger mt-1 mx-1"
+                href="{% url 'user_lostfound_delete' item.id %}"
+                >Delete</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      <!--  -->
+      {% if lostfound_items|length == 0 %}
+      <div class="col mb-5">
+        <div
+          class="card h-100"
+          style="
+            transform: perspective(1px) translateZ(0);
+            box-shadow: 0 0 1px rgba(0, 0, 0, 0), 0 3px 15px rgba(0, 0, 0, 0.2);
+          "
+        >
+          <div class="card-body p-4">
+            <div class="text-center">
+              <h5 class="fw-bolder">You have no item in the lost&found</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+    <div class="text-center">
+      <button
+        class="btn btn-success"
+        onclick="location.href='{% url 'lostfound_item_new' %}'"
+      >
+        Post a new item
+      </button>
+    </div>
+  </div>
+</section>
+<!--  -->
+{% endblock %}

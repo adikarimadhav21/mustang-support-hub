@@ -9,12 +9,12 @@ from django.contrib import messages
 from . import models
 from . import forms
 
-# View for logging out the user
+# View for logging out the user like controller 
 def LogoutView(request):
     logout(request)
     return redirect("login")
 
-# View for user login
+# View for user login like controller 
 class LoginView(View):
     def get(self, request):
         if request.user.is_authenticated:
@@ -36,7 +36,7 @@ class LoginView(View):
                 messages.error(request, "Invalid Credentials")
                 return redirect("login")
 
-# View for user registration
+# View for user registration like controller 
 class RegisterView(View):
     def get(self, request):
         if request.user.is_authenticated:
@@ -82,7 +82,7 @@ class RegisterView(View):
         return render(request, "register.html", {"register_form": register_form})
 
 
-# View for password reset
+# View for password reset 
 
 class PasswordResetView(View):
     def get(self, request):

@@ -1,0 +1,155 @@
+{% extends 'base.html' %} {% block main %}
+
+<section class="py-5">
+  <div class="container px-4 px-lg-5 my-5">
+    <div class="row gx-4 gx-lg-5 align-items-center">
+      <div class="col-md-6">
+        <img
+          class="card-img-top mb-5 mb-md-0 border rounded-3 shadow-lg"
+          src="{{ roomfinder_item.image.url }}"
+          alt="..."
+        />
+      </div>
+      <div class="col-md-6">
+        <h1 class="display-5 fw-bolder">
+          <!--  -->
+          {{ roomfinder_item.title }}
+        </h1>
+        <div>
+          <p>{{ roomfinder_item.description }}</p>
+        </div>
+
+        <table class="table border">
+          <tr>
+            <td><b>Location</b>:</td>
+            <td>{{ roomfinder_item.location }}</td>
+          </tr>
+          <tr>
+            <td><b>Availability</b>:</td>
+            <td>{{ roomfinder_item.no_of_availability }}</td>
+          </tr>
+          <tr>
+            <td><b>Available From</b>:</td>
+            <td>{{ roomfinder_item.available_from }}</td>
+          </tr>
+          <tr>
+            <td><b>Room Type</b>:</td>
+            <td>{{ roomfinder_item.room_type }}</td>
+          </tr>
+          <tr>
+            <td><b>Prefered Gender</b>:</td>
+            <td>{{ roomfinder_item.prefered_gender }}</td>
+          </tr>
+          <tr>
+            <td><b>Stay Duration</b>:</td>
+            <td>{{ roomfinder_item.stay_type }}</td>
+          </tr>
+          <tr>
+            <td><b>Smoking</b>:</td>
+            <td>{{ roomfinder_item.smoking_preference }}</td>
+          </tr>
+          <tr>
+            <td><b>Food Preference</b>:</td>
+            <td>{{ roomfinder_item.vegetarian_preference }}</td>
+          </tr>
+          <tr>
+            <td><b>Pet</b>:</td>
+            <td>{{ roomfinder_item.pet_preference }}</td>
+          </tr>
+          <tr>
+            <td><b>Alcohol</b>:</td>
+            <td>{{ roomfinder_item.alcohol_preference }}</td>
+          </tr>
+          <tr>
+            <td><b>Contact</b>:</td>
+            <td>{{ roomfinder_item.contact }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <!--  -->
+    {% if roomfinder_item.image_2 %}
+    <div class="row mt-5">
+      <!--  -->
+      {% if roomfinder_item.image_2 %}
+      <div class="col-4">
+        <img
+          class="card-img-top mb-5 mb-md-0 border rounded-3 shadow-lg"
+          src="{{ roomfinder_item.image_2.url }}"
+          alt="..."
+        />
+      </div>
+      <!--  -->
+      {% endif %}
+      <!--  -->
+      {% if roomfinder_item.image_3 %}
+      <div class="col-4">
+        <img
+          class="card-img-top mb-5 mb-md-0 border rounded-3 shadow-lg"
+          src="{{ roomfinder_item.image_3.url }}"
+          alt="..."
+        />
+      </div>
+      <!--  -->
+      {% endif %}
+      <!--  -->
+      {% if roomfinder_item.image_4 %}
+      <div class="col-4">
+        <img
+          class="card-img-top mb-5 mb-md-0 border rounded-3 shadow-lg"
+          src="{{ roomfinder_item.image_4.url }}"
+          alt="..."
+        />
+      </div>
+      <!--  -->
+      {% endif %}
+    </div>
+    <!--  -->
+    {% endif %}
+  </div>
+</section>
+
+<!-- Related items section-->
+<section class="py-5 bg-light">
+  <div class="container px-4 px-lg-5 mt-5">
+    <h2 class="fw-bolder mb-4">Similar Items</h2>
+    <div class="container px-4 px-lg-5 mt-5">
+      <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Location</th>
+            <th scope="col">Availability</th>
+            <th scope="col">Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in similar_items %}
+          <tr>
+            <th scope="row">
+              <!--  -->
+              {{ item.title }}
+            </th>
+            <td>
+              <!--  -->
+              {{ item.location }}
+            </td>
+            <td>
+              <!--  -->
+              {{ item.no_of_availability }}
+            </td>
+            <td>
+              <a
+                class="btn btn-outline-success mt-auto rounded"
+                href="{% url 'roomfinder_room' item.id %}"
+                >View Details</a
+              >
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+{% endblock %}

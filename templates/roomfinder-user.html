@@ -1,27 +1,23 @@
-{% extends 'base.html' %}
-<!--  -->
-{% block header %}
+{% extends 'base.html' %} {% block header %}
 <!-- Header-->
 <header class="bg-dark py-5">
   <div class="container px-4 px-lg-5">
     <div class="text-center text-white">
-      <h1 class="display-4 fw-bolder">Ride Share</h1>
+      <h1 class="display-4 fw-bolder">Room Finder</h1>
       <p class="lead fw-normal text-white-50 mb-0">
-        Share Rides, Share Stories, Share the Road!
+        Find Your Perfect Roommate, Make Campus Feel Like Home!
       </p>
 
       <button
         class="btn btn-success mt-5 -mb-5"
-        onclick="location.href='{% url 'rideshare_ride_new' %}'"
+        onclick="location.href='{% url 'roomfinder_room_new' %}'"
       >
-        Post a new ride
+        Post a new room
       </button>
     </div>
   </div>
 </header>
-{% endblock %}
-<!--  -->
-{% block main %}
+{% endblock %} {% block main %}
 
 <!--  -->
 {% for message in messages %}
@@ -37,7 +33,7 @@
     <div class="row">
       <!-- search -->
       <div class="col-12">
-        <form method="GET" action="{% url 'rideshare_search' %}" class="mb-5">
+        <form method="GET" action="{% url 'roomfinder_search' %}" class="mb-5">
           <div class="input-group mb-3">
             <input
               type="text"
@@ -57,51 +53,37 @@
     <table class="table">
       <thead class="thead-light">
         <tr>
-          <th scope="col">From</th>
-          <th scope="col">To</th>
-          <th scope="col"><i class="fa fa-calendar"></i> Date</th>
-          <th scope="col"><i class="fa fa-clock-o"></i> Time</th>
+          <th scope="col">Apartments</th>
+          <th scope="col">Location</th>
           <th scope="col">Availability</th>
           <th scope="col">Details</th>
         </tr>
       </thead>
       <tbody>
-        {% if rideshare_items|length == 0 %}
+        {% if roomfinder_items|length == 0 %}
         <tr>
-          <td colspan="6" class="text-center">No items found</td>
+          <td colspan="4" class="text-center">No items found</td>
         </tr>
         {% endif %}
         <!--  -->
-        {% for item in rideshare_items %}
+        {% for item in roomfinder_items %}
         <tr>
           <th scope="row">
             <!--  -->
-            {{ item.start_location }}
-          </th>
-          <th scope="row">
-            <!--  -->
-            {{ item.end_location }}
+            {{ item.title }}
           </th>
           <td>
             <!--  -->
-            {{ item.datetime | date:"F d, Y" }}
+            {{ item.location }}
           </td>
           <td>
             <!--  -->
-            {{ item.datetime | date:"h:i A" }}
-          </td>
-          <td>
-            <!--  -->
-            {{ item.available_seats }}
-            <!--  -->
-            /
-            <!--  -->
-            {{ item.total_seats }}
+            {{ item.no_of_availability }}
           </td>
           <td>
             <a
               class="btn btn-outline-success mt-auto rounded"
-              href="{% url 'rideshare_ride' item.id %}"
+              href="{% url 'roomfinder_room' item.id %}"
               >View Details</a
             >
           </td>

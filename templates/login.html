@@ -24,6 +24,15 @@
                   <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                 </div>
 
+                <!--  -->
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}" role="alert">
+                  <!--  -->
+                  {{ message }}
+                </div>
+                <!--  -->
+                {% endfor %}
+
                 <form class="user" method="post">
                   {% csrf_token %}
                   <!-- {{ login_form.as_p }} -->
@@ -40,6 +49,11 @@
                 <div class="text-center">
                   <a class="small" href="{% url 'register' %}"
                     >Create an Account!</a
+                  >
+                </div>
+                <div class="text-center">
+                  <a class="small" href="{% url 'password_reset' %}"
+                    >Forgot Password?</a
                   >
                 </div>
               </div>

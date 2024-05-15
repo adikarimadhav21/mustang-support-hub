@@ -1,11 +1,46 @@
-{% extends 'base.html' %} {% block header %}
-<!-- Header-->
-<header class="bg-dark py-5">
-  <div class="container px-4 px-lg-5 my-5">
-    <div class="text-center text-white">
-      <h1 class="display-4 fw-bolder">Homepage</h1>
-      <p class="lead fw-normal text-white-50 mb-0">This is a homepage</p>
+{% extends 'base.html' %}
+<!--  -->
+{% block header %}
+<!--  -->
+<!--  -->
+{% endblock %}
+<!--  -->
+{% block main %}
+<!--  -->
+<div class="container-fluid my-5">
+  <div class="row align-items-center">
+    <div class="col-md-10 mx-auto col-xl-5 mb-4">
+      <div class="lc-block">
+        <img
+          class="img-fluid rounded"
+          src="https://media.istockphoto.com/id/1307457287/photo/group-of-happy-students-looking-at-exam-results-while-standing-at-university-hallway.jpg?s=1024x1024&w=is&k=20&c=sf5nVCQ4wAcwaYOdUcWUVVPvVMDRAP81Fnw_WkqfMsg="
+          srcset=""
+          sizes=""
+          width=""
+          height=""
+          alt="Photo by Alessandro Di Credico"
+          loading="lazy"
+        />
+      </div>
+    </div>
+    <div class="col-12 col-xl-5 mx-auto" style="">
+      <div class="lc-block mb-3 me-lg-5">
+        <div editable="rich">
+          <h1 class="fw-bolder">Mustangs Support Hub</h1>
+          <p class="lead">
+            The Mustangs Support Hub is a dynamic platform designed to address the practical needs and challenges faced by university students on a daily basis.
+From finding compatible roommates to sharing rides and managing lost belongings, Mustangs Support Hub provides essential services and features tailored to the unique needs of our campus community.
+.
+          </p>
+        </div>
+      </div>
+      <div class="lc-block d-grid gap-3 d-lg-block">
+        <a class="btn btn-success mt-2" href="{% url 'login' %}" role="button"
+          >LOGIN / REGISTER</a
+        >
+      </div>
     </div>
   </div>
-</header>
-{% endblock %} {% block main %} {% endblock %}
+</div>
+<!--  -->
+{% endblock %}

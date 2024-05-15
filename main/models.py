@@ -38,7 +38,7 @@ ALCOHOL_PREFERENCE_CHOICES = [
     ("Doesn't Matter", "Doesn't Matter"),
 ]
 
-#module for marketplace
+#module for marketplace category
 class MarketplaceCategoryModel(models.Model):
     category = models.CharField(max_length=100)
 
@@ -49,7 +49,7 @@ class MarketplaceCategoryModel(models.Model):
         verbose_name = "Marketplace Category"
         verbose_name_plural = "Marketplace Categories"
 
-
+#module for marketplace
 class MarketplaceModel(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(MarketplaceCategoryModel, on_delete=models.CASCADE)
@@ -71,7 +71,7 @@ class MarketplaceModel(models.Model):
         verbose_name = "Marketplace Item"
         verbose_name_plural = "Marketplace Items"
 
-
+#module for room finder
 class RoomFinderModel(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
@@ -107,7 +107,7 @@ class RoomFinderModel(models.Model):
         verbose_name = "Room Finder"
         verbose_name_plural = "Room Finders"
 
-
+# Model for ride sharing information
 class RideShareModel(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     start_location = models.CharField(max_length=100)
@@ -131,7 +131,7 @@ class RideShareModel(models.Model):
         verbose_name = "Ride Share"
         verbose_name_plural = "Ride Shares"
 
-
+# Model for lost and found item categories
 class LostAndFoundCategoryModel(models.Model):
     category = models.CharField(max_length=100)
 
@@ -142,7 +142,7 @@ class LostAndFoundCategoryModel(models.Model):
         verbose_name = "Lost and Found Category"
         verbose_name_plural = "Lost and Found Categories"
 
-
+# Model for lost and found item 
 class LostAndFoundModel(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(LostAndFoundCategoryModel, on_delete=models.CASCADE)
@@ -163,7 +163,7 @@ class LostAndFoundModel(models.Model):
         verbose_name = "Lost and Found"
         verbose_name_plural = "Lost and Founds"
 
-
+# Model for contact
 class ContactModel(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField()

@@ -51,11 +51,12 @@ def validate_password(value):
         raise ValidationError("Password should contain at least one special character")
 
 
+#email validation 
 def validate_email_domain(value):
     if not value.endswith("@my.msutexas.edu"):
         raise ValidationError("Email must end with '@my.msutexas.edu'")
 
-# Form classes
+# Sign up form with respective field information 
 class register(forms.Form):
     first_name = forms.CharField(
         label="First Name",
@@ -114,7 +115,8 @@ class register(forms.Form):
         ),
     )
 
-#login form
+#login form with respective field information 
+
 class login(forms.Form):
     email = forms.EmailField(
         label="Email",
@@ -139,6 +141,7 @@ class login(forms.Form):
     )
 
 
+# password reset form with respective field information 
 class PasswordResetForm(forms.Form):
     email = forms.EmailField(
         label="Email",
@@ -173,6 +176,7 @@ class PasswordResetForm(forms.Form):
         ),
     )
 
+# marketplace form with respective field information 
 
 class MarketplaceForm(forms.ModelForm):
     class Meta:
@@ -218,7 +222,7 @@ class MarketplaceForm(forms.ModelForm):
             ),
         }
 
-
+# roomfinder form with respective field information 
 class RoomFinderForm(forms.ModelForm):
     class Meta:
         model = models.RoomFinderModel
@@ -311,7 +315,7 @@ class RoomFinderForm(forms.ModelForm):
             ),
         }
 
-
+# rideshare form with respective field information 
 class RideShareForm(forms.ModelForm):
     class Meta:
         model = models.RideShareModel
@@ -428,6 +432,7 @@ class UserProfileEditForm(forms.Form):
         ),
     )
 
+# contact form with respective field information 
 
 class ContactForm(forms.ModelForm):
     class Meta:
